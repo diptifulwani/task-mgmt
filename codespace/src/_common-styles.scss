@@ -1,0 +1,135 @@
+$bg-color: scale-color($base-color, $blue: 75%);
+$text-color: invert($base-color);
+$border-color: scale-color($base-color, $green: 50%);
+$task-bg-color:lighten($base-color, 100%);
+
+& {
+  width: 100%;
+  height: 100%;
+  padding-top: 1rem;
+}
+
+.task-container {
+  width: max-content;
+  max-width: 100%;
+  margin: 0 2rem 2rem 0;
+  display: inline-block;
+  vertical-align: top;
+  padding: 1rem;
+  padding-bottom: 3rem;
+  border: 0.1rem solid $border-color;
+  background: $bg-color;
+}
+
+.droplist-container {
+  h2 {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+}
+
+.task-list {
+  overflow: hidden;
+  display: block;
+}
+
+.task-box {
+  padding: 0.5rem;
+  border-top: 0.05rem solid $border-color;
+  border-left: 0.05rem solid $border-color;
+  border-right: 0.05rem solid $border-color;
+  color: $text-color;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: $task-bg-color;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 0.4rem;
+  box-shadow: 0 0.5rem 0.5rem -0.3rem rgba(0, 0, 0, 0.2),
+    0 0.8rem 1rem 0.1rem rgba(0, 0, 0, 0.14),
+    0 0.3rem 1.4rem 0.2rem rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-animating {
+  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.task-box:last-child {
+  border-bottom: 0.05rem solid $border-color;
+}
+
+.task-list.cdk-drop-list-dragging .task-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-control {
+  border: none;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.close {
+  font-size: 1.40rem;
+  font-weight: 300;
+}
+
+.task-list-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.task-title {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.form-control[readonly] {
+  background-color: transparent;
+}
+
+.add-link {
+  float: right;
+  padding-right: 0;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.bottom-right-cornered {
+  position: absolute;
+  bottom: 0;
+  right: 1rem;
+}
+
+.relatively-positioned {
+  position: relative;
+}
+
+.bottom-bordered {
+  border-bottom: 0.2rem solid $text-color;
+  margin-bottom: 1rem;
+}
+
+.header-actions {
+  .btn {
+    height: 3rem;
+  }
+}

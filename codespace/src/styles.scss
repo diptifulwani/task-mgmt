@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+  font-size: 12px;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+
+  .theme-default {
+    $base-color: #777777;
+    @import './common-styles';
+  }
+
+  .theme-light {
+    $base-color: #eeeeee;
+    @import './common-styles';
+  }
+
+  .theme-dark {
+    $base-color: #000000;
+    @import './common-styles';
+  }
+
+  .btn-margin-left {
+    margin-left: 0.5rem;
+  }
+}

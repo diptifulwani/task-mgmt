@@ -1,0 +1,21 @@
+<h2 cdkDragHandle>
+  <input type="text" readonly class="form-control task-list-title" [(ngModel)]="taskListItem.taskTitle"
+    (click)="editTaskListTitle(taskListItem)" (keyup.enter)="editTaskListTitle(taskListItem)" />
+  <button type="button" class="close" aria-label="Close" (click)="deleteTaskList(taskListItem)"
+    (keyup.enter)="deleteTaskList(taskListItem)">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</h2>
+<div cdkDropList [cdkDropListData]="taskListItem.tasks" [id]="taskListItem.taskId.toString()" class="task-list"
+  (cdkDropListDropped)="drop($event)" [cdkDropListConnectedTo]="taskIds">
+  <div class="task-box" *ngFor="let task of taskListItem.tasks" cdkDrag>
+    <input type="text" readonly class="form-control task-title" [(ngModel)]="task"
+      (click)="editTaskTitle(taskListItem, task)" (keyup.enter)="editTaskTitle(taskListItem, task)" />
+    <button type="button" class="close" aria-label="Close" (click)="deleteTask(taskListItem, task)"
+      (keyup.enter)="deleteTask(taskListItem, task)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+<button type="button" class="btn btn-link add-link bottom-right-cornered" (click)="addTask(taskListItem)"
+  (keyup.enter)="addTask(taskListItem)">{{literals.ADD_TASK}}</button>

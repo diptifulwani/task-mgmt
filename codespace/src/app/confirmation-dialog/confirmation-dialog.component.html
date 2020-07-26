@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <p>{{data.message}}</p>
+</div>
+<div mat-dialog-actions class="justify-content-end">
+  <button mat-button [mat-dialog-close]="literals.NO" class="btn btn-outline-danger">{{literals.NO}}</button>
+  <button mat-button [mat-dialog-close]="literals.YES" cdkFocusInitial
+    class="btn btn-outline-success btn-margin-left">{{literals.YES}}</button>
+</div>

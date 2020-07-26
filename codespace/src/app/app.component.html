@@ -1,0 +1,31 @@
+<div [ngClass]="selectedTheme">
+  <div class="row no-margin d-flex bottom-bordered">
+    <div class="col">
+      <h2>Task Management</h2>
+    </div>
+    <div class="col-4 header-actions">
+      <div class="row d-flex justify-content-between">
+        <button type="button" class="btn btn-outline-primary " (click)="addTaskList()"
+          (keyup.enter)="addTaskList()">{{literals.ADD_LIST}}</button>
+        <button type="button" class="btn btn-outline-primary" (click)="saveLists()"
+          (keyup.enter)="saveLists()">{{literals.STORE}}</button>
+        <mat-form-field>
+          <mat-label>Select Theme</mat-label>
+          <mat-select [(value)]="selectedTheme">
+            <mat-option *ngFor="let theme of themes" [value]="theme">
+              {{theme}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div cdkDropList [cdkDropListData]="taskList" class="row droplist-container no-margin"
+    (cdkDropListDropped)="dropCompleteList($event)" cdkDropListOrientation="horizontal">
+    <div class="task-container relatively-positioned" *ngFor="let taskListItem of taskList" cdkDrag>
+      <app-task-list-item [taskListItem]="taskListItem" [taskList]="taskList" [literals]="literals">
+      </app-task-list-item>
+    </div>
+  </div>
+</div>

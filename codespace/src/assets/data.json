@@ -1,0 +1,22 @@
+[{
+    "taskId": 1,
+    "taskTitle": "To Do",
+    "tasks": [
+      "Pay electricity bill",
+      "Make grocery list"
+    ]
+  }, {
+    "taskId": 2,
+    "taskTitle": "In Progress",
+    "tasks": [
+      "Iron clothes"
+    ]
+  },
+  {
+    "taskId": 3,
+    "taskTitle": "Done",
+    "tasks": [
+      "Buy running shoes"
+    ]
+  }
+]
