@@ -10,6 +10,9 @@ export class DataService {
   constructor() {
   }
 
+  /**
+   * Function to fetch the task list from data store
+   */
   getTaskList(): Array<TaskListItem> {
     // Get the list from session
     let taskList: any = window.sessionStorage.getItem(SESSION_STORE_KEY);
@@ -25,7 +28,9 @@ export class DataService {
     return taskList;
   }
 
-
+  /**
+   * Function to save the task list to data store
+   */
   setTaskList(taskList: Array<TaskListItem>) {
     // save to session
     window.sessionStorage.setItem(SESSION_STORE_KEY, JSON.stringify(taskList));

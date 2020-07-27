@@ -10,7 +10,7 @@ import { EditItemDialogComponent } from './edit-item-dialog/edit-item-dialog.com
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  providers: [AppService]
+  providers: [AppService] // Providing the service into the component using it to keep the bundle size to minimal
 })
 export class AppComponent {
   literals;
@@ -26,10 +26,18 @@ export class AppComponent {
     return this.appService.taskList;
   }
 
+  /**
+   * Method to handle the drag and drop of complete task list item
+   */
   dropCompleteList(event: CdkDragDrop<string[]>) {
     AppUtil.reorderArrayItem(this.appService.taskList, event.previousIndex, event.currentIndex);
   }
 
+  /**
+   * Method to handle the event for adding a new entry into task list.
+   * It checks for the limit of the list and gives an error message in case of limit exceeded
+   * else it opens a dialog to perform the add action.
+   */
   addTaskList() {
     if (this.taskList.length < MAX_TASK_LIST_LENGTH) {
       const dialogRef = this.dialog.open(EditItemDialogComponent, {
@@ -42,7 +50,7 @@ export class AppComponent {
         }
       });
 
-      dialogRef.afterClosed().subscribe(result => {
+      const closeSubscription = dialogRef.afterClosed().subscribe(result => {
         if (result) {
           const id = this.appService.taskList.length + 1;
           this.appService.taskList.push({
@@ -52,6 +60,7 @@ export class AppComponent {
             ]
           });
         }
+        closeSubscription.unsubscribe(); // Unsubscribing the subscription after getting the user action for closing the dialog
       });
     } else {
       this.snackBar.open(this.literals.MAX_LENGTH_REACHED, null, {
@@ -60,6 +69,9 @@ export class AppComponent {
     }
   }
 
+  /**
+   * Method to handle the event for save of lists into store
+   */
   saveLists() {
     this.appService.saveLists();
   }

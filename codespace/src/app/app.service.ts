@@ -19,10 +19,16 @@ export class AppService {
     ];
   }
 
+  /**
+   * Function to initialize the task list from data store
+   */
   initializeTaskList() {
     this.taskList = this.dataService.getTaskList();
   }
 
+  /**
+   * Function to save the current state of task list to data store
+   */
   saveLists() {
     this.dataService.setTaskList(this.taskList);
   }

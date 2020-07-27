@@ -27,6 +27,11 @@ export class TaskListItemComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Method to handle the event for editing a task list title.
+   * It opens a dialog to perform the edit action.
+   * This dialog is same as the one used for creation of the item.
+   */
   editTaskListTitle(taskListItem) {
     const dialogRef = this.dialog.open(EditItemDialogComponent, {
       width: DIALOG_WIDTH,
@@ -40,13 +45,19 @@ export class TaskListItemComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    const closeSubscription = dialogRef.afterClosed().subscribe(result => {
       if (result) {
         taskListItem.taskTitle = result;
       }
+      closeSubscription.unsubscribe();
     });
   }
 
+  /**
+   * Method to handle the event for deletion of a task list item.
+   * It opens a confirmation dialog for user
+   * and upon getting the confirmation deletes the item from the list.
+   */
   deleteTaskList(taskListItem) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: DIALOG_WIDTH,
@@ -56,14 +67,18 @@ export class TaskListItemComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    const closeSubscription = dialogRef.afterClosed().subscribe(result => {
       if (result === this.literals.YES) {
         const index = this.taskList.indexOf(taskListItem);
         this.taskList.splice(index, 1);
       }
+      closeSubscription.unsubscribe();
     });
   }
 
+  /**
+   * Method to handle the event for drag and drop of tasks in the list
+   */
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -75,6 +90,11 @@ export class TaskListItemComponent implements OnInit {
     }
   }
 
+  /**
+   * Method to handle the event for editing a task in the list.
+   * It opens a dialog to perform the edit action.
+   * This dialog is same as the one used for creation of the task.
+   */
   editTaskTitle(taskListItem, task) {
     const dialogRef = this.dialog.open(EditItemDialogComponent, {
       width: DIALOG_WIDTH,
@@ -88,14 +108,20 @@ export class TaskListItemComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    const closeSubscription = dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const index = taskListItem.tasks.indexOf(task);
         taskListItem.tasks[index] = result;
       }
+      closeSubscription.unsubscribe();
     });
   }
 
+  /**
+   * Method to handle the event for deletion of a task from the list.
+   * It opens a confirmation dialog for user
+   * and upon getting the confirmation deletes the task from the task list item.
+   */
   deleteTask(taskListItem, task) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: DIALOG_WIDTH,
@@ -107,14 +133,21 @@ export class TaskListItemComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    const closeSubscription = dialogRef.afterClosed().subscribe(result => {
       if (result === this.literals.YES) {
         const index = taskListItem.tasks.indexOf(task);
         taskListItem.tasks.splice(index, 1);
       }
+      closeSubscription.unsubscribe();
     });
   }
 
+  /**
+   * Method to handle the event for adding a task in the list.
+   * It checks for the limit of the list and gives an error message in case of limit exceeded
+   * else it opens a dialog to perform the add action.
+   * Upon successful closure of dialog it adds an entry into the task list item
+   */
   addTask(taskListItem) {
     if (taskListItem.tasks.length < MAX_TASK_LENGTH) {
       const dialogRef = this.dialog.open(EditItemDialogComponent, {
@@ -127,10 +160,11 @@ export class TaskListItemComponent implements OnInit {
         }
       });
 
-      dialogRef.afterClosed().subscribe(result => {
+      const closeSubscription = dialogRef.afterClosed().subscribe(result => {
         if (result) {
           taskListItem.tasks.push(result);
         }
+        closeSubscription.unsubscribe();
       });
     } else {
       this.snackBar.open(this.literals.MAX_LENGTH_REACHED, null, {

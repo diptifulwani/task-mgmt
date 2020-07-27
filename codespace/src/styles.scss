@@ -10,6 +10,13 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 
+  /**
+Different themes created for UX.
+Only providing the base color changes the theme.
+More themes can be added similarly.
+The theme added below should also be added in the themes array in AppService.
+*/
+
   .theme-default {
     $base-color: #777777;
     @import './common-styles';

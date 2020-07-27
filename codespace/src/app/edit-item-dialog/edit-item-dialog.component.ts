@@ -17,6 +17,11 @@ export class EditItemDialogComponent {
     this.literals = LITERALS;
   }
 
+  /**
+   * Method to handle the close event of dialog.
+   * It validates the data entered in the dialog and shows error messages accordingly,
+   * else performs the successful closure of the dialog.
+   */
   closeDialog() {
     const title = this.data.name.trim();
     if (!title) {
